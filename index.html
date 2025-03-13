@@ -91,10 +91,41 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
             border-radius: 5px;
+            appearance: none; /* 移除默认箭头 */
+            -webkit-appearance: none; /* Safari 和 Chrome */
+            -moz-appearance: none; /* Firefox */
         }
 
         .language-switcher select:hover {
             background-color: rgba(138, 43, 226, 1);
+        }
+
+        /* 自定义下拉箭头 */
+        .language-switcher::after {
+            content: '▼';
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            color: #fff;
+            pointer-events: none;
+        }
+
+        /* 选项悬停效果 */
+        .language-switcher option {
+            background-color: rgba(17, 17, 17, 0.9);
+            color: #fff;
+        }
+
+        .language-switcher option:hover {
+            background-color: #8a2be2 !important; /* 悬停时紫色 */
+            color: #fff;
+        }
+
+        /* 选中选项高亮 */
+        .language-switcher option:checked {
+            background-color: #8a2be2; /* 选中时紫色 */
+            color: #fff;
         }
 
         /* 主要内容 */
