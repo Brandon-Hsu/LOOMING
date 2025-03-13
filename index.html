@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOOMING - Cyberpunk Tech</title>
+    <style>
+        /* 全局样式 */
+        body {
+            font-family: 'Orbitron', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #0a0a0a;
+            background-image: 
+                radial-gradient(circle, rgba(128, 0, 128, 0.1) 10%, transparent 10.01%),
+                linear-gradient(135deg, rgba(128, 0, 128, 0.1), rgba(0, 0, 0, 0.8)),
+                linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* 头部 */
+        header {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 60px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        header h1 {
+            font-size: 4rem;
+            margin: 0;
+            color: #e0e0e0;
+            font-weight: 700;
+            font-style: italic;
+            text-transform: uppercase;
+            letter-spacing: 40px;
+            text-shadow: 0 0 10px #8a2be2, 0 0 20px #8a2be2, 0 0 40px #8a2be2, 0 0 80px #8a2be2;
+            animation: glow 2s infinite alternate;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: #ccc;
+            margin-top: 10px;
+            text-shadow: 0 0 10px #8a2be2, 0 0 20px #8a2be2;
+        }
+
+        /* 导航栏 */
+        nav {
+            background-color: rgba(17, 17, 17, 0.9);
+            padding: 15px 0;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(138, 43, 226, 0.5);
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+            font-size: 1rem;
+        }
+
+        nav a:hover {
+            color: #8a2be2; /* 紫色 */
+        }
+
+        /* 语言选择器 */
+        .language-switcher {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+        }
+
+        .language-switcher select {
+            background-color: rgba(138, 43, 226, 0.8);
+            border: none;
+            color: #fff;
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border-radius: 5px;
+        }
+
+        .language-switcher select:hover {
+            background-color: rgba(138, 43, 226, 1);
+        }
+
+        /* 主要内容 */
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            color: #8a2be2;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            font-weight: 700;
+            font-style: italic;
+            text-shadow: 0 0 10px #8a2be2, 0 0 20px #8a2be2, 0 0 40px #8a2be2;
+            animation: glow 2s infinite alternate;
+        }
+
+        .section p {
+            font-size: 1rem;
+            color: #ccc;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .section img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-top: 20px;
+            box-shadow: 0 4px 10px rgba(138, 43, 226, 0.5), 0 0 20px rgba(138, 43, 226, 0.7);
+        }
+
+        /* 项目展示 */
+        .projects {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .project {
+            flex: 1 1 calc(33.333% - 20px);
+            background-color: rgba(17, 17, 17, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(138, 43, 226, 0.5), 0 0 40px rgba(138, 43, 226, 0.7);
+        }
+
+        .project h3 {
+            font-size: 1.5rem;
+            color: #8a2be2;
+            margin-bottom: 10px;
+            font-weight: 700;
+            font-style: italic;
+            text-shadow: 0 0 10px #8a2be2, 0 0 20px #8a2be2;
+        }
+
+        .project p {
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+
+        /* 联系部分 */
+        #contact {
+            text-align: center;
+        }
+
+        #contact h2 {
+            font-size: 1.2rem; /* 调小3倍 */
+            color: #8a2be2;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            font-weight: 700;
+            font-style: italic;
+            text-shadow: 0 0 10px #8a2be2, 0 0 20px #8a2be2;
+        }
+
+        #contact a {
+            color: #8a2be2;
+            text-decoration: none;
+            font-weight: bold;
+            transition: opacity 0.3s ease;
+        }
+
+        #contact a:hover {
+            opacity: 0.8;
+        }
+
+        /* 页脚 */
+        footer {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 60px;
+            box-shadow: 0 -4px 10px rgba(138, 43, 226, 0.5);
+        }
+
+        footer p {
+            margin: 0;
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        /* 动画效果 */
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #8a2be2, 0 0 20px #8a2be2, 0 0 40px #8a2be2; }
+            to { text-shadow: 0 0 20px #8a2be2, 0 0 40px #8a2be2, 0 0 80px #8a2be2; }
+        }
+
+        @keyframes scanline {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease-in-out;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- 语言选择器 -->
+    <div class="language-switcher">
+        <select onchange="changeLanguage(this.value)">
+            <option value="en">English</option>
+            <option value="zh">中文</option>
+        </select>
+    </div>
+
+    <!-- Cyberpunk 元素 -->
+    <div class="cyberpunk-grid"></div>
+    <div class="scanline"></div>
+
+    <!-- 头部 -->
+    <header class="fade-in">
+        <h1>LOOMING</h1>
+        <p id="header-subtitle">Design · Code · Creativity</p>
+    </header>
+
+    <!-- 导航栏 -->
+    <nav>
+        <a href="#about" id="nav-about">About</a>
+        <a href="#projects" id="nav-projects">Projects</a>
+        <a href="#contact" id="nav-contact">Contact</a>
+    </nav>
+
+    <!-- 主要内容 -->
+    <div class="container">
+        <!-- 关于部分 -->
+        <section id="about" class="section fade-in">
+            <h2 id="about-title">About Me</h2>
+            <p id="about-text">I'm a designer and developer with a passion for creating minimalist and impactful digital experiences. My work focuses on simplicity, functionality, and aesthetics.</p>
+            <img src="https://via.placeholder.com/1200x400" alt="About Image">
+        </section>
+
+        <!-- 项目部分 -->
+        <section id="projects" class="section fade-in">
+            <h2 id="projects-title">Projects</h2>
+            <div class="projects">
+                <div class="project neon-border">
+                    <h3 id="project1-title">Project 1</h3>
+                    <p id="project1-text">A sleek and modern web design for a creative agency.</p>
+                </div>
+                <div class="project neon-border">
+                    <h3 id="project2-title">Project 2</h3>
+                    <p id="project2-text">An interactive portfolio website with unique animations.</p>
+                </div>
+                <div class="project neon-border">
+                    <h3 id="project3-title">Project 3</h3>
+                    <p id="project3-text">A minimalist e-commerce platform with a focus on user experience.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 联系部分 -->
+        <section id="contact" class="section fade-in">
+            <h2 id="contact-title">Contact</h2>
+            <p id="contact-text">If you'd like to collaborate or just say hi, feel free to reach out!</p>
+            <p>Email: <a href="mailto:hello@looming.com">hello@looming.com</a></p>
+        </section>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="fade-in">
+        <p>&copy; 2025 LOOMING. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // 多语言支持
+        const translations = {
+            en: {
+                headerSubtitle: "Design · Code · Creativity",
+                navAbout: "About",
+                navProjects: "Projects",
+                navContact: "Contact",
+                aboutTitle: "About Me",
+                aboutText: "I'm a designer and developer with a passion for creating minimalist and impactful digital experiences. My work focuses on simplicity, functionality, and aesthetics.",
+                projectsTitle: "Projects",
+                project1Title: "Project 1",
+                project1Text: "A sleek and modern web design for a creative agency.",
+                project2Title: "Project 2",
+                project2Text: "An interactive portfolio website with unique animations.",
+                project3Title: "Project 3",
+                project3Text: "A minimalist e-commerce platform with a focus on user experience.",
+                contactTitle: "Contact",
+                contactText: "If you'd like to collaborate or just say hi, feel free to reach out!"
+            },
+            zh: {
+                headerSubtitle: "设计 · 代码 · 创意",
+                navAbout: "关于",
+                navProjects: "项目",
+                navContact: "联系",
+                aboutTitle: "关于我",
+                aboutText: "我是一名设计师和开发者，热衷于创造简约而有影响力的数字体验。我的作品注重简洁、功能和美学。",
+                projectsTitle: "项目",
+                project1Title: "项目 1",
+                project1Text: "为创意机构设计的时尚现代网页。",
+                project2Title: "项目 2",
+                project2Text: "具有独特动画的互动作品集网站。",
+                project3Title: "项目 3",
+                project3Text: "专注于用户体验的简约电子商务平台。",
+                contactTitle: "联系",
+                contactText: "如果您想合作或打个招呼，请随时联系！"
+            }
+        };
+
+        function changeLanguage(lang) {
+            document.documentElement.lang = lang;
+            const elements = document.querySelectorAll('[id]');
+            elements.forEach(el => {
+                if (translations[lang] && translations[lang][el.id]) {
+                    el.textContent = translations[lang][el.id];
+                }
+            });
+        }
+
+        // 默认语言
+        changeLanguage('en');
+    </script>
+</body>
+</html>
